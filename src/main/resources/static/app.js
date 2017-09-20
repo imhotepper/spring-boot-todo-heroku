@@ -10,6 +10,7 @@ app = new Vue({
   },
   methods:{
   addTodo: function(){
+    if (!this.newTodo) return;
     axios.post('/api/todos', {title:this.newTodo, isCompleted: false})
     .then((response)=> {
 
@@ -22,7 +23,7 @@ app = new Vue({
     },
     completeTodo: function(){
       var that = this;
-        this.selectedTodos.map(function(item){
+       this.selectedTodos.map(function(item){
             axios.post(`/api/todos/${item}/complete`)
                 .then(function(response) {
                     //todo: remove from one list and add to another
@@ -36,13 +37,13 @@ app = new Vue({
         });
     },
     deleteTodo: function(id){
-        var that = this;
         axios.delete(`/api/todos/${id}`)
-                        .then(function(response) {
+                        .then((response) => {
                             //todo: remove from one list and add to another
                             let deleted = response.data;
-                            that.completedTodos = that.completedTodos.filter((x)=> x.id != deleted.id);
-                            console.log('got back for deleted: ', response.data );
+                            this.completedTodos = this.completedTodos.filter((x)=> x.id != deleted.id);
+                            //that.completedTodos = that.completedTodos.filter((x)=> x.id != deleted.id);
+                             console.log('got back for deleted: ', response.data );
                         })
                         .catch((err)=> console.log('error deleting: ', err));
     }
@@ -66,6 +67,6 @@ app = new Vue({
 Vue.component('todo-component', {
     template: '#todo-component',
     data: function () {
-
+//TODO: create the components and use vuex
     }
     });
