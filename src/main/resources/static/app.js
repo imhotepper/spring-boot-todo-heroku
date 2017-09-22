@@ -7,7 +7,7 @@ app = new Vue({
     todos:[],
     completedTodos:[],
     selectedTodos:[],
-      isLoading: true
+    isLoading: true
 
   },
   methods:{

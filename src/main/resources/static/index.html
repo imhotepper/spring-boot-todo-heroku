@@ -22,13 +22,13 @@
     <div class="row" id="">
         <div class="col-md-6">
             <div class="todolist not-done">
-                <h1>{{title}} ...</h1>
+                <h1>{{title}}</h1>
                 <input type="text" v-model="newTodo" @keyup.13="addTodo" class="form-control add-todo" placeholder="Add todo">
                 <button id="checkAll"  @click="completeTodo" class="btn btn-success ">Mark as selected done</button>
 
                 <hr>
                 <h3 v-if="isLoading"> loading data  ...</h3>
-                <h3 v-if="!todos.length > 0 & !isLoading">No todos yet</h3>
+                <h3 v-if="!todos.length > 0 && !isLoading">No todos yet</h3>
                 <ul id="sortable" class="list-unstyled">
                     <li v-for="todo in todos" class="ui-state-default">
                         <div class="checkbox">
