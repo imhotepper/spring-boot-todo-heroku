@@ -7,7 +7,7 @@ app = new Vue({
     todos:[],
     completedTodos:[],
     selectedTodos:[],
-      isLoading: false
+      isLoading: true
 
   },
   methods:{
@@ -18,7 +18,7 @@ app = new Vue({
 
                         this.todos.push(response.data);
                         this.newTodo ='';
-                        });
+                        })
 
     .catch((err)=> console.log('error: ',err))
         console.log('adding new todo: ', this.newTodo);
