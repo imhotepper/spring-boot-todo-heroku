@@ -6,7 +6,9 @@ app = new Vue({
     newTodo:'',
     todos:[],
     completedTodos:[],
-    selectedTodos:[]
+    selectedTodos:[],
+      isLoading: false
+
   },
   methods:{
   addTodo: function(){
@@ -16,7 +18,7 @@ app = new Vue({
 
                         this.todos.push(response.data);
                         this.newTodo ='';
-                        })
+                        });
 
     .catch((err)=> console.log('error: ',err))
         console.log('adding new todo: ', this.newTodo);
@@ -49,16 +51,17 @@ app = new Vue({
     }
   },
   created: function(){
+      this.isLoading = true;
     axios.get('/api/todos')
         .then((response) =>{
             console.log('data in:' ,response);
             response.data.map((x)=>
             x.isCompleted == true ?
                      this.completedTodos.push(x) : this.todos.push(x));
-           // this.todos = response.data
+           this.isLoading = false;
         }
          )
-        .catch((err) => console.log('Error: ', err));
+        .catch((err) => {this.isLoading= false; console.log('Error: ', err);});
     console.log('app created');
     }
 })
